@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import RootLayout from './components/RootLayout';
 import AuthLayout from './components/layout/AuthLayout';
 import Home from './pages/Home';
@@ -25,15 +27,12 @@ const router = createBrowserRouter([
           { 
             path: ":id", 
             Component: BillDetails,
-            loader: ({ params }) => {
-              return fetch(`/api/bills/${params.id}`);
-            }
           },
         ]
       },
       { path: "about", Component: About },
       {
-        path: "auth",
+        path: "/",
         Component: AuthLayout,
         children: [
           { path: "login", Component: Login },
@@ -47,14 +46,6 @@ const router = createBrowserRouter([
           { 
             path: "my-bills", 
             Component: MyPayBills,
-            loader: ({ request }) => {
-              // Protected data loading
-              const user = JSON.parse(localStorage.getItem('user'));
-              if (!user) {
-                throw new Response("Unauthorized", { status: 401 });
-              }
-              return fetch(`/api/my-bills?userId=${user.uid}`);
-            }
           },
           { path: "profile", Component: () => <div>Profile Page</div> },
           { path: "settings", Component: () => <div>Settings Page</div> },
@@ -66,7 +57,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
