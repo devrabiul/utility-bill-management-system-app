@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import RootLayout from './components/RootLayout';
+import AuthLayout from './components/layout/AuthLayout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Bills from './pages/bills/Bills';
+import BillDetails from './pages/bills/BillDetails';
+import MyPayBills from './pages/bills/MyPayBills';
+import NotFound from './pages/NotFound';
+import PrivateRoute from './components/auth/PrivateRoute';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootLayout,
+    errorElement: <NotFound />,
+    children: [
+      { index: true, Component: Home },
+      { 
+        path: "bills", 
+        children: [
+          { index: true, Component: Bills },
+          { 
+            path: ":id", 
+            Component: BillDetails,
+            loader: ({ params }) => {
+              return fetch(`/api/bills/${params.id}`);
+            }
+          },
+        ]
+      },
+      { path: "about", Component: About },
+      {
+        path: "auth",
+        Component: AuthLayout,
+        children: [
+          { path: "login", Component: Login },
+          { path: "register", Component: Register },
+        ],
+      },
+      {
+        path: "dashboard",
+        element: <PrivateRoute />,
+        children: [
+          { 
+            path: "my-bills", 
+            Component: MyPayBills,
+            loader: ({ request }) => {
+              // Protected data loading
+              const user = JSON.parse(localStorage.getItem('user'));
+              if (!user) {
+                throw new Response("Unauthorized", { status: 401 });
+              }
+              return fetch(`/api/my-bills?userId=${user.uid}`);
+            }
+          },
+          { path: "profile", Component: () => <div>Profile Page</div> },
+          { path: "settings", Component: () => <div>Settings Page</div> },
+        ],
+      },
+      { path: "*", Component: NotFound },
+    ],
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
