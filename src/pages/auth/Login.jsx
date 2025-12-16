@@ -4,8 +4,11 @@ import { FaEnvelope, FaLock, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa"
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/config";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const Login = () => {
+  useDocumentTitle('Login'); 
+
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);

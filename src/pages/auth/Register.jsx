@@ -4,8 +4,11 @@ import { FaUser, FaEnvelope, FaLock, FaImage, FaEye, FaEyeSlash, FaGoogle } from
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/config";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const Register = () => {
+  useDocumentTitle('Register');
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
