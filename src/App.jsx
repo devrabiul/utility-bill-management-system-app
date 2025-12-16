@@ -8,6 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Bills from './pages/bills/Bills';
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: "contact", Component: Contact },
       { path: "faq", Component: FAQ },
       { path: "privacy", Component: PrivacyPolicy },
+      { path: "terms", Component: TermsOfService },
       {
         path: "/",
         Component: AuthLayout,
