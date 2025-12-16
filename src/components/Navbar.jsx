@@ -8,6 +8,7 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+import avatarUser from "../assets/img/avatar-user.jpg";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -81,12 +82,12 @@ const Navbar = () => {
                   <div className="flex items-center space-x-2 cursor-pointer">
                     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
                       <img
-                        src={
-                          user.photoURL ||
-                          `https://ui-avatars.com/api/?name=${user.displayName}&background=random`
-                        }
+                        src={user.photoURL}
                         alt={user.displayName || "User"}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = avatarUser;
+                        }}
                       />
                     </div>
                     <span className="font-medium">
@@ -154,12 +155,12 @@ const Navbar = () => {
               </Link>
               <div className="flex items-center space-x-3 py-2 px-2">
                 <img
-                  src={
-                    user.photoURL ||
-                    `https://ui-avatars.com/api/?name=${user.displayName}&background=random`
-                  }
+                  src={user.photoURL}
                   alt={user.displayName || "User"}
                   className="w-8 h-8 rounded-full"
+                  onError={(e) => {
+                    e.currentTarget.src = avatarUser;
+                  }}
                 />
                 <span className="flex-grow">{user.displayName}</span>
                 <button

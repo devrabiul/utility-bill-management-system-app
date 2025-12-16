@@ -69,7 +69,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/my-bills"
+                  to="/bills"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   My Payments

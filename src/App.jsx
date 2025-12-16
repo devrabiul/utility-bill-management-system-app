@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "dashboard",
+        path: "/",
         element: <PrivateRoute />,
         children: [
           { 
