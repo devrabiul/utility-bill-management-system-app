@@ -14,6 +14,7 @@ import Register from './pages/auth/Register';
 import Bills from './pages/bills/Bills';
 import BillDetails from './pages/bills/BillDetails';
 import MyPayBills from './pages/bills/MyPayBills';
+import Profile from './pages/dashboard/Profile';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/auth/PrivateRoute';
 
@@ -59,6 +60,19 @@ const router = createBrowserRouter([
           { path: "settings", Component: () => <div>Settings Page</div> },
         ],
       },
+
+      {
+        path: "dashboard",
+        element: <PrivateRoute />,
+        children: [
+          { 
+            path: "my-bills", 
+            Component: MyPayBills,
+          },
+          { path: "profile", Component: Profile },
+        ],
+      },
+
       { path: "*", Component: NotFound },
     ],
   },
