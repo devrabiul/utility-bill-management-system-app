@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Bills from './pages/bills/Bills';
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "about", Component: About },
       { path: "contact", Component: Contact },
       { path: "faq", Component: FAQ },
+      { path: "privacy", Component: PrivacyPolicy },
       {
         path: "/",
         Component: AuthLayout,
