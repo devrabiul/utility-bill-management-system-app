@@ -34,7 +34,6 @@ const Profile = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Profile Card */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="text-center mb-6">
@@ -65,13 +64,11 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Profile Details */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <h2 className="text-xl font-bold text-gray-800 mb-6">Personal Information</h2>
                 
                 <div className="space-y-6">
-                  {/* Name Field */}
                   <div>
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                       <FaUser className="text-gray-500" />
@@ -82,7 +79,6 @@ const Profile = () => {
                       </div>
                   </div>
 
-                  {/* Email Field */}
                   <div>
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                       <FaEnvelope className="text-gray-500" />
@@ -93,7 +89,6 @@ const Profile = () => {
                       </div>
                   </div>
 
-                  {/* Phone Field */}
                   <div>
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                       <FaPhone className="text-gray-500" />
@@ -104,7 +99,6 @@ const Profile = () => {
                       </div>
                   </div>
 
-                  {/* Address Field */}
                   <div>
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                       <FaMapMarkerAlt className="text-gray-500" />

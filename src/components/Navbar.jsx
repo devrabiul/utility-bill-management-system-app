@@ -57,7 +57,6 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
               <span className="text-blue-600 font-bold text-xl">UB</span>
@@ -67,7 +66,6 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to="/"
@@ -95,7 +93,6 @@ const Navbar = () => {
                   <span>My Pay Bills</span>
                 </Link>
 
-                {/* Profile Dropdown */}
                 <div className="relative group">
                   <div className="flex items-center space-x-2 cursor-pointer">
                     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
@@ -113,7 +110,6 @@ const Navbar = () => {
                     </span>
                   </div>
 
-                  {/* Dropdown Menu */}
                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <div className="p-4 border-b">
                       <p className="text-gray-800 font-medium truncate">
@@ -161,7 +157,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-2xl focus:outline-none"
             onClick={toggleMobileMenu}
@@ -171,7 +166,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pt-4 border-t border-white/20">
             <div className="flex flex-col space-y-3">
@@ -193,7 +187,6 @@ const Navbar = () => {
                 <span>Bills</span>
               </Link>
 
-              {/* About Us & Related Pages */}
               <Link
                 to="/about"
                 className="py-2 px-2 hover:bg-white/10 rounded-lg transition-colors"
@@ -238,7 +231,6 @@ const Navbar = () => {
                     <span>Profile</span>
                   </Link>
 
-                  {/* User Info */}
                   <div className="py-3 px-2 border-t border-white/20">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
