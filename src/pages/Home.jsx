@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { baseApiUrl } from "../utils/AppConstants";
 
 const Home = () => {
 
@@ -69,7 +70,7 @@ const Home = () => {
   const fetchRecentBills = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/bills");
+      const response = await fetch(`${baseApiUrl}/api/bills`);
       const data = await response.json();
       setRecentBills(data);
     } catch (error) {

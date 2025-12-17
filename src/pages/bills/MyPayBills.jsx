@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { baseApiUrl } from '../../utils/AppConstants';
 
 const MyPayBills = () => {
   useDocumentTitle('My Paid Bills');
@@ -32,7 +33,7 @@ const MyPayBills = () => {
     try {
       setLoading(true);
       // Changed from /api/bills to /api/my-bills
-      const response = await fetch(`http://localhost:3000/api/my-bills?userId=${user.uid}`);
+      const response = await fetch(`${baseApiUrl}/api/my-bills?userId=${user.uid}`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -70,7 +71,7 @@ const MyPayBills = () => {
     
     try {
       // Changed from /api/bills to /api/my-bills
-      const response = await fetch(`http://localhost:3000/api/my-bills/${selectedBill._id}`, {
+      const response = await fetch(`${baseApiUrl}/api/my-bills/${selectedBill._id}`, {
         method: 'DELETE'
       });
 
@@ -96,7 +97,7 @@ const MyPayBills = () => {
     
     try {
       // Changed from /api/bills to /api/my-bills
-      const response = await fetch(`http://localhost:3000/api/my-bills/${selectedBill._id}`, {
+      const response = await fetch(`${baseApiUrl}/api/my-bills/${selectedBill._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

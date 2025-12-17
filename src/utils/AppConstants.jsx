@@ -1,0 +1,1 @@
+export const baseApiUrl = "https://express.rixetbd.com"

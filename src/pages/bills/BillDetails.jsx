@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { FaCalendar, FaMapMarkerAlt, FaDollarSign, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { baseApiUrl } from '../../utils/AppConstants';
 
 const BillDetails = () => {
   useDocumentTitle('Bill Details');
@@ -28,7 +29,7 @@ const BillDetails = () => {
   const fetchBillDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/api/bills/${id}`);
+      const response = await fetch(`${baseApiUrl}/api/bills/${id}`);
       const data = await response.json();      
       setBill(data);
     } catch (error) {
@@ -59,7 +60,7 @@ const BillDetails = () => {
         userId: user.uid
       };
 
-      const response = await fetch('http://localhost:3000/api/bills', {
+      const response = await fetch(`${baseApiUrl}/api/bills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

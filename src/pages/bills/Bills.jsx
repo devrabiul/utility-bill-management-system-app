@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFilter, FaSearch, FaCalendar, FaMapMarkerAlt, FaEye } from 'react-icons/fa';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { baseApiUrl } from '../../utils/AppConstants';
 
 const Bills = () => {
   useDocumentTitle('All Bills');
@@ -25,7 +26,7 @@ const Bills = () => {
   const fetchBills = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/bills');
+      const response = await fetch(`${baseApiUrl}/api/bills`);
       const data = await response.json();
       setBills(data);
       setFilteredBills(data);
