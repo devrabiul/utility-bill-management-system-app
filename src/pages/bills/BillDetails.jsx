@@ -60,7 +60,7 @@ const BillDetails = () => {
         userId: user.uid
       };
 
-      const response = await fetch(`${baseApiUrl}/api/bills`, {
+      const response = await fetch(`${baseApiUrl}/api/my-bills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const BillDetails = () => {
       if (response.ok) {
         toast.success('Bill payment successful!');
         setShowPaymentModal(false);
-        navigate('/dashboard/bills');
+        navigate('/dashboard/my-bills');
       } else {
         throw new Error('Payment failed');
       }

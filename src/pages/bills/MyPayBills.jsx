@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { FaEdit, FaTrash, FaDownload, FaFilePdf, FaUser, FaEnvelope, FaMapMarkerAlt, FaPhone, FaCalendar, FaMoneyBillWave } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { baseApiUrl } from '../../utils/AppConstants';
 
@@ -32,7 +32,6 @@ const MyPayBills = () => {
   const fetchMyBills = async () => {
     try {
       setLoading(true);
-      // Changed from /api/bills to /api/my-bills
       const response = await fetch(`${baseApiUrl}/api/my-bills?userId=${user.uid}`);
       
       if (!response.ok) {
@@ -44,7 +43,7 @@ const MyPayBills = () => {
     } catch (error) {
       console.error('Failed to load your bills:', error);
       toast.error('Failed to load your bills. Please try again.');
-      setMyBills([]); // Set empty array on error
+      setMyBills([]);
     } finally {
       setLoading(false);
     }
@@ -70,7 +69,6 @@ const MyPayBills = () => {
     if (!selectedBill) return;
     
     try {
-      // Changed from /api/bills to /api/my-bills
       const response = await fetch(`${baseApiUrl}/api/my-bills/${selectedBill._id}`, {
         method: 'DELETE'
       });
@@ -96,7 +94,6 @@ const MyPayBills = () => {
     if (!selectedBill) return;
     
     try {
-      // Changed from /api/bills to /api/my-bills
       const response = await fetch(`${baseApiUrl}/api/my-bills/${selectedBill._id}`, {
         method: 'PUT',
         headers: {
@@ -107,7 +104,7 @@ const MyPayBills = () => {
 
       if (response.ok) {
         toast.success('Bill updated successfully');
-        fetchMyBills(); // Refresh the list
+        fetchMyBills();
         setShowUpdateModal(false);
         setSelectedBill(null);
       } else {
@@ -128,15 +125,15 @@ const MyPayBills = () => {
 
     try {
       const doc = new jsPDF();
-      
+
       doc.setFontSize(20);
       doc.text('Bill Payment Report', 14, 22);
-      
+
       doc.setFontSize(12);
       doc.setTextColor(100);
       doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 32);
       doc.text(`User: ${user?.displayName || user?.email}`, 14, 38);
-      
+
       const tableColumn = ['Username', 'Email', 'Amount', 'Address', 'Phone', 'Date'];
       const tableRows = myBills.map(bill => [
         bill.username || 'N/A',
@@ -147,7 +144,7 @@ const MyPayBills = () => {
         bill.date ? new Date(bill.date).toLocaleDateString() : 'N/A'
       ]);
 
-      doc.autoTable({
+      autoTable(doc, {
         head: [tableColumn],
         body: tableRows,
         startY: 45,
@@ -156,23 +153,22 @@ const MyPayBills = () => {
         headStyles: { fillColor: [41, 128, 185] }
       });
 
-      const totalAmount = myBills.reduce((sum, bill) => sum + (bill.amount || 0), 0);
       const finalY = doc.lastAutoTable.finalY || 45;
-      
+      const totalAmount = myBills.reduce((sum, bill) => sum + (bill.amount || 0), 0);
+
       doc.setFontSize(12);
       doc.setTextColor(0);
       doc.text(`Total Bills Paid: ${myBills.length}`, 14, finalY + 15);
       doc.text(`Total Amount: ৳${totalAmount.toLocaleString()}`, 14, finalY + 25);
-      
-      const fileName = `bill-report-${user?.uid || 'user'}-${new Date().getTime()}.pdf`;
-      doc.save(fileName);
-      
+
+      doc.save(`bill-report-${user?.uid || 'user'}.pdf`);
       toast.success('PDF report downloaded successfully');
     } catch (error) {
       console.error('PDF generation error:', error);
       toast.error('Failed to generate PDF report');
     }
   };
+
 
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
